@@ -14,3 +14,14 @@ config/name="gamejam_24_08_25"
 run/main_scene="res://node_2d.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[layer_names]
+
+2d_render/layer_1="player"
+2d_render/layer_2="projectile"
+2d_render/layer_3="enemies"
+2d_render/layer_4="parry"
+2d_physics/layer_1="scene"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="playerProjectile"
