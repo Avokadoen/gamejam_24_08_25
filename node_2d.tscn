@@ -50,10 +50,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 radius = 8.0
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(95, -122)
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
-position = Vector2(168, 602)
+z_index = 10
+position = Vector2(39, 360)
 collision_layer = 2
 collision_mask = 21
 script = SubResource("GDScript_wtcfe")
@@ -64,14 +64,14 @@ script = ExtResource("2_epypp")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-z_index = 10
+z_index = 4
 position = Vector2(-1.90735e-06, 0.500002)
 scale = Vector2(0.171875, 0.164062)
 texture = ExtResource("1_wtcfe")
 metadata/_edit_lock_ = true
 
 [node name="gun" type="Node2D" parent="."]
-position = Vector2(661, 234)
+position = Vector2(74, 3)
 rotation = -1.5708
 script = ExtResource("2_0e48y")
 
@@ -98,7 +98,6 @@ script = ExtResource("4_0hol4")
 shape = SubResource("CircleShape2D_q6r6c")
 
 [node name="Hell" parent="." instance=ExtResource("5_q6r6c")]
-position = Vector2(2468, 317)
 scale = Vector2(0.7, 0.7)
 metadata/_edit_lock_ = true
 
