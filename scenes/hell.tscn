@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://y0ifermp54he"]
+
+[ext_resource type="Texture2D" uid="uid://bo6xvlhewqy1o" path="res://textures/parallax/BG_Layer_Back.png" id="1_dgjee"]
+[ext_resource type="Script" uid="uid://dx7j5rqgu0ydf" path="res://scripts/parallax.gd" id="2_quimm"]
+[ext_resource type="Texture2D" uid="uid://de3g8oh3x6l2k" path="res://textures/parallax/BG_Layer_Mid.png" id="3_yvlf7"]
+[ext_resource type="Texture2D" uid="uid://b3jc270igqjhh" path="res://textures/parallax/BG_Layer_Front.png" id="4_hankl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_idiul"]
+size = Vector2(7698, 146)
+
+[node name="Hell" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+z_index = 4
+script = ExtResource("2_quimm")
+distance = 4.0
+
+[node name="BgLayerFront" type="Sprite2D" parent="StaticBody2D"]
+z_index = 4
+position = Vector2(71, -273)
+scale = Vector2(2, 2)
+texture = ExtResource("4_hankl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-16, 647)
+shape = SubResource("RectangleShape2D_idiul")
+
+[node name="BgLayerMid" type="Sprite2D" parent="."]
+z_index = 4
+texture = ExtResource("3_yvlf7")
+script = ExtResource("2_quimm")
+distance = 6.0
+
+[node name="BgLayerBack" type="Sprite2D" parent="."]
+z_index = 3
+texture = ExtResource("1_dgjee")
+script = ExtResource("2_quimm")
+distance = 8.0

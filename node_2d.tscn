@@ -1,12 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://n0h83kg12smm"]
+[gd_scene load_steps=9 format=3 uid="uid://dae06ah2opttl"]
 
 [ext_resource type="Texture2D" uid="uid://deu3aia44vj3o" path="res://icon.svg" id="1_wtcfe"]
-[ext_resource type="Script" uid="uid://cq7yc5xel31o0" path="res://gun.gd" id="2_0e48y"]
-[ext_resource type="Script" uid="uid://degf07mqxgwk5" path="res://collision_player.gd" id="2_epypp"]
-[ext_resource type="Script" uid="uid://bmkbdfdqytm1y" path="res://area_2d.gd" id="4_0hol4"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
-size = Vector2(146, 45)
+[ext_resource type="Script" path="res://gun.gd" id="2_0e48y"]
+[ext_resource type="Script" path="res://collision_player.gd" id="2_epypp"]
+[ext_resource type="Script" path="res://area_2d.gd" id="4_0hol4"]
+[ext_resource type="PackedScene" uid="uid://y0ifermp54he" path="res://scenes/hell.tscn" id="5_q6r6c"]
 
 [sub_resource type="GDScript" id="GDScript_wtcfe"]
 script/source = "extends CharacterBody2D
@@ -52,45 +50,25 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 radius = 8.0
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(95, -122)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(459, 257)
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(21, 56.25)
-scale = Vector2(1.20312, 0.386719)
-texture = ExtResource("1_wtcfe")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(23, 55.5)
-shape = SubResource("RectangleShape2D_0e48y")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(631, 269)
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
-position = Vector2(2.99969, 0.750019)
-scale = Vector2(1.20312, 0.386719)
-texture = ExtResource("1_wtcfe")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(-0.000305176, 0.500015)
-shape = SubResource("RectangleShape2D_0e48y")
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(459, 234)
+[node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
+position = Vector2(168, 602)
 collision_layer = 2
 collision_mask = 21
 script = SubResource("GDScript_wtcfe")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_0hol4")
 script = ExtResource("2_epypp")
+metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+z_index = 10
 position = Vector2(-1.90735e-06, 0.500002)
 scale = Vector2(0.171875, 0.164062)
 texture = ExtResource("1_wtcfe")
+metadata/_edit_lock_ = true
 
 [node name="gun" type="Node2D" parent="."]
 position = Vector2(661, 234)
@@ -98,12 +76,14 @@ rotation = -1.5708
 script = ExtResource("2_0e48y")
 
 [node name="Sprite2D" type="Sprite2D" parent="gun"]
+z_index = 6
 position = Vector2(-1, 27)
 rotation = 1.5708
 scale = Vector2(0.421875, 0.0820313)
 texture = ExtResource("1_wtcfe")
 
 [node name="Sprite2D2" type="Sprite2D" parent="gun"]
+z_index = 6
 position = Vector2(-18, 48)
 scale = Vector2(0.210937, 0.0976563)
 texture = ExtResource("1_wtcfe")
@@ -117,4 +97,9 @@ script = ExtResource("4_0hol4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_q6r6c")
 
-[connection signal="body_entered" from="Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]
+[node name="Hell" parent="." instance=ExtResource("5_q6r6c")]
+position = Vector2(2468, 317)
+scale = Vector2(0.7, 0.7)
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="Area2D" to="Player" method="_on_area_2d_body_entered"]
