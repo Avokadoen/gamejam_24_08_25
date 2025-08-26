@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dae06ah2opttl"]
 
-[ext_resource type="Script" uid="uid://c1polj7ry10r4" path="res://turret.gd" id="1_kdubu"]
+[ext_resource type="Script" uid="uid://cwuo56dpwl0o" path="res://scripts/scroller.gd" id="1_kdubu"]
 [ext_resource type="Texture2D" uid="uid://deu3aia44vj3o" path="res://icon.svg" id="1_wtcfe"]
 [ext_resource type="Script" uid="uid://cq7yc5xel31o0" path="res://gun.gd" id="2_0e48y"]
 [ext_resource type="Script" uid="uid://degf07mqxgwk5" path="res://collision_player.gd" id="2_epypp"]
@@ -52,20 +52,14 @@ radius = 8.0
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Turret" type="Node2D" parent="."]
-position = Vector2(200, 300)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1830, 92)
+zoom = Vector2(0.8, 0.8)
 script = ExtResource("1_kdubu")
-count = 3
-rot_speed = 100
-
-[node name="Sprite2D" type="Sprite2D" parent="Turret"]
-z_index = 6
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_wtcfe")
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
 z_index = 10
-position = Vector2(39, 360)
+position = Vector2(-2163, 384)
 collision_layer = 2
 collision_mask = 21
 script = SubResource("GDScript_wtcfe")
@@ -101,6 +95,7 @@ script = ExtResource("4_0hol4")
 shape = SubResource("CircleShape2D_q6r6c")
 
 [node name="Hell" parent="." instance=ExtResource("5_q6r6c")]
+z_index = -10
 scale = Vector2(0.7, 0.7)
 metadata/_edit_lock_ = true
 

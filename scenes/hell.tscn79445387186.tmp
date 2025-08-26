@@ -9,16 +9,16 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_71pqw"]
 shader = ExtResource("1_71pqw")
-shader_parameter/whiteness_to_alpha_modifier = 7.55
-shader_parameter/scroll_rate = 0.13
+shader_parameter/whiteness_to_alpha_modifier = 3.0
+shader_parameter/scroll_rate = 0.3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_idiul"]
 size = Vector2(7698, 146)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q11ot"]
 shader = ExtResource("1_71pqw")
-shader_parameter/whiteness_to_alpha_modifier = 0.0
-shader_parameter/scroll_rate = 0.04
+shader_parameter/whiteness_to_alpha_modifier = 3.0
+shader_parameter/scroll_rate = 0.3
 
 [node name="Hell" type="Node2D"]
 
@@ -30,14 +30,11 @@ scale = Vector2(2, 2)
 texture = ExtResource("1_dgjee")
 script = ExtResource("3_71pqw")
 target_canvas = NodePath(".")
-whiteness_to_alpha_modifier = 7.55
-scroll_rate = 0.13
+whiteness_to_alpha_modifier = 3.14
+scroll_rate = 100.0
 
 [node name="FrontLayer" type="StaticBody2D" parent="."]
-z_index = 4
 script = ExtResource("2_quimm")
-distance_x = 0.05
-distance_y = 0.5
 
 [node name="BgLayerFront" type="Sprite2D" parent="FrontLayer"]
 z_index = 4
@@ -53,14 +50,12 @@ shape = SubResource("RectangleShape2D_idiul")
 z_index = 4
 texture = ExtResource("3_yvlf7")
 script = ExtResource("2_quimm")
-distance_x = 0.3
-distance_y = 0.2
+distance = 6.0
 
 [node name="BackLayer" type="Node2D" parent="." node_paths=PackedStringArray("target_canvas")]
 script = ExtResource("3_71pqw")
 target_canvas = NodePath("BgLayerBack")
-whiteness_to_alpha_modifier = 0.0
-scroll_rate = 0.04
+whiteness_to_alpha_modifier = 4.41
 
 [node name="BgLayerBack" type="Sprite2D" parent="BackLayer"]
 z_index = 3
@@ -68,5 +63,4 @@ texture_repeat = 2
 material = SubResource("ShaderMaterial_q11ot")
 texture = ExtResource("1_dgjee")
 script = ExtResource("2_quimm")
-distance_x = 0.1
-distance_y = 0.1
+distance = 0.2

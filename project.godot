@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="gamejam_24_08_25"
+run/main_scene="uid://dae06ah2opttl"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[global_group]
+
+ScrollController=""
 
 [input]
 
