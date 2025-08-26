@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dae06ah2opttl"]
+[gd_scene load_steps=10 format=3 uid="uid://dae06ah2opttl"]
 
+[ext_resource type="Script" uid="uid://c1polj7ry10r4" path="res://turret.gd" id="1_kdubu"]
 [ext_resource type="Texture2D" uid="uid://deu3aia44vj3o" path="res://icon.svg" id="1_wtcfe"]
 [ext_resource type="Script" uid="uid://cq7yc5xel31o0" path="res://gun.gd" id="2_0e48y"]
 [ext_resource type="Script" uid="uid://degf07mqxgwk5" path="res://collision_player.gd" id="2_epypp"]
@@ -50,6 +51,17 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 radius = 8.0
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Turret" type="Node2D" parent="."]
+position = Vector2(200, 300)
+script = ExtResource("1_kdubu")
+count = 3
+rot_speed = 100
+
+[node name="Sprite2D" type="Sprite2D" parent="Turret"]
+z_index = 6
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_wtcfe")
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
 z_index = 10
