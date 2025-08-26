@@ -1,24 +1,33 @@
-[gd_scene load_steps=10 format=3 uid="uid://y0ifermp54he"]
+[gd_scene load_steps=13 format=3 uid="uid://y0ifermp54he"]
 
 [ext_resource type="Shader" uid="uid://bylptl8hrbe0k" path="res://shaders/dust.gdshader" id="1_71pqw"]
 [ext_resource type="Texture2D" uid="uid://bo6xvlhewqy1o" path="res://textures/parallax/BG_Layer_Back.png" id="1_dgjee"]
-[ext_resource type="Script" uid="uid://dx7j5rqgu0ydf" path="res://scripts/parallax.gd" id="2_quimm"]
 [ext_resource type="Script" uid="uid://055aiyp1gbuw" path="res://scripts/dust_control.gd" id="3_71pqw"]
 [ext_resource type="Texture2D" uid="uid://de3g8oh3x6l2k" path="res://textures/parallax/BG_Layer_Mid.png" id="3_yvlf7"]
 [ext_resource type="Texture2D" uid="uid://b3jc270igqjhh" path="res://textures/parallax/BG_Layer_Front.png" id="4_hankl"]
+[ext_resource type="Shader" uid="uid://cio5nk6ui1jdo" path="res://shaders/scrolling_and_parallax.gdshader" id="5_8ogo1"]
+[ext_resource type="Script" uid="uid://b2xeahj8kiioa" path="res://scripts/scroll_control.gd" id="7_weiqd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_71pqw"]
 shader = ExtResource("1_71pqw")
 shader_parameter/whiteness_to_alpha_modifier = 7.55
-shader_parameter/scroll_rate = 0.13
+shader_parameter/scroll_rate = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ogo1"]
+shader = ExtResource("5_8ogo1")
+shader_parameter/scroll_rate = 3.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_idiul"]
 size = Vector2(7698, 146)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_weiqd"]
+shader = ExtResource("5_8ogo1")
+shader_parameter/scroll_rate = 3.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q11ot"]
 shader = ExtResource("1_71pqw")
 shader_parameter/whiteness_to_alpha_modifier = 0.0
-shader_parameter/scroll_rate = 0.04
+shader_parameter/scroll_rate = 0.3
 
 [node name="Hell" type="Node2D"]
 
@@ -35,38 +44,39 @@ scroll_rate = 0.13
 
 [node name="FrontLayer" type="StaticBody2D" parent="."]
 z_index = 4
-script = ExtResource("2_quimm")
-distance_x = 0.05
-distance_y = 0.5
 
-[node name="BgLayerFront" type="Sprite2D" parent="FrontLayer"]
+[node name="BgLayerFront" type="Sprite2D" parent="FrontLayer" node_paths=PackedStringArray("target_canvas")]
 z_index = 4
+texture_repeat = 2
+material = SubResource("ShaderMaterial_8ogo1")
 position = Vector2(71, -273)
 scale = Vector2(2, 2)
 texture = ExtResource("4_hankl")
+script = ExtResource("7_weiqd")
+target_canvas = NodePath(".")
+scroll_rate = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FrontLayer"]
 position = Vector2(-16, 647)
 shape = SubResource("RectangleShape2D_idiul")
 
-[node name="MidLayer" type="Sprite2D" parent="."]
+[node name="MidLayer" type="Sprite2D" parent="." node_paths=PackedStringArray("target_canvas")]
 z_index = 4
+texture_repeat = 2
+material = SubResource("ShaderMaterial_weiqd")
 texture = ExtResource("3_yvlf7")
-script = ExtResource("2_quimm")
-distance_x = 0.3
-distance_y = 0.2
+script = ExtResource("7_weiqd")
+target_canvas = NodePath(".")
+scroll_rate = 0.05
 
 [node name="BackLayer" type="Node2D" parent="." node_paths=PackedStringArray("target_canvas")]
 script = ExtResource("3_71pqw")
 target_canvas = NodePath("BgLayerBack")
 whiteness_to_alpha_modifier = 0.0
-scroll_rate = 0.04
+scroll_rate = 0.01
 
 [node name="BgLayerBack" type="Sprite2D" parent="BackLayer"]
 z_index = 3
 texture_repeat = 2
 material = SubResource("ShaderMaterial_q11ot")
 texture = ExtResource("1_dgjee")
-script = ExtResource("2_quimm")
-distance_x = 0.1
-distance_y = 0.1

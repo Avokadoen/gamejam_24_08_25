@@ -1,17 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://dae06ah2opttl"]
+[gd_scene load_steps=9 format=3 uid="uid://dae06ah2opttl"]
 
-[ext_resource type="Script" uid="uid://cwuo56dpwl0o" path="res://scripts/scroller.gd" id="1_kdubu"]
 [ext_resource type="Texture2D" uid="uid://deu3aia44vj3o" path="res://icon.svg" id="1_wtcfe"]
 [ext_resource type="Script" uid="uid://cq7yc5xel31o0" path="res://gun.gd" id="2_0e48y"]
-[ext_resource type="Script" uid="uid://degf07mqxgwk5" path="res://collision_player.gd" id="2_epypp"]
-[ext_resource type="Script" uid="uid://bmkbdfdqytm1y" path="res://area_2d.gd" id="4_0hol4"]
+[ext_resource type="Script" path="res://collision_player.gd" id="2_epypp"]
+[ext_resource type="Script" path="res://area_2d.gd" id="4_0hol4"]
 [ext_resource type="PackedScene" uid="uid://y0ifermp54he" path="res://scenes/hell.tscn" id="5_q6r6c"]
 
 [sub_resource type="GDScript" id="GDScript_wtcfe"]
 script/source = "extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = 600.0
 const JUMP_VELOCITY = -300.0
 
 func _physics_process(delta: float) -> void:
@@ -52,14 +51,13 @@ radius = 8.0
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-1830, 92)
+[node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
+position = Vector2(0, 66)
 zoom = Vector2(0.8, 0.8)
-script = ExtResource("1_kdubu")
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
 z_index = 10
-position = Vector2(-2163, 384)
+position = Vector2(0, 335)
 collision_layer = 2
 collision_mask = 21
 script = SubResource("GDScript_wtcfe")
