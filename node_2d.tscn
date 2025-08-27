@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dae06ah2opttl"]
+[gd_scene load_steps=12 format=3 uid="uid://dae06ah2opttl"]
 
 [ext_resource type="Texture2D" uid="uid://deu3aia44vj3o" path="res://icon.svg" id="1_wtcfe"]
 [ext_resource type="Script" uid="uid://cq7yc5xel31o0" path="res://gun.gd" id="2_0e48y"]
@@ -7,6 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://y0ifermp54he" path="res://scenes/hell.tscn" id="5_q6r6c"]
 [ext_resource type="Script" uid="uid://buicc7e5grbj7" path="res://PlatformSpawner/platform_spawner.gd" id="6_kdubu"]
 [ext_resource type="PackedScene" uid="uid://b5os2pyj8sem0" path="res://PlatformSpawner/PlatformScene.tscn" id="7_d21ai"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q6r6c"]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d21ai"]
+size = Vector2(2697, 767)
 
 [sub_resource type="GDScript" id="GDScript_wtcfe"]
 script/source = "extends CharacterBody2D
@@ -48,47 +54,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_q6r6c"]
-radius = 8.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d21ai"]
-size = Vector2(2697, 167.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rj586"]
-size = Vector2(128, 128)
-
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
 position = Vector2(0, 66)
 zoom = Vector2(0.8, 0.8)
-
-[node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
-z_index = 10
-collision_layer = 2
-collision_mask = 21
-script = SubResource("GDScript_wtcfe")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_0hol4")
-script = ExtResource("2_epypp")
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-z_index = 4
-position = Vector2(-1.90735e-06, 0.500002)
-scale = Vector2(0.171875, 0.164062)
-texture = ExtResource("1_wtcfe")
-metadata/_edit_lock_ = true
-
-[node name="gun" type="Node2D" parent="Player"]
-script = ExtResource("2_0e48y")
-
-[node name="Sprite2D" type="Sprite2D" parent="Player/gun"]
-z_index = 6
-position = Vector2(14.4, 0)
-scale = Vector2(0.2125, 0.082)
-texture = ExtResource("1_wtcfe")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(459, 280)
@@ -107,24 +77,43 @@ metadata/_edit_lock_ = true
 [node name="PlatformSpawner" type="Node2D" parent="."]
 script = ExtResource("6_kdubu")
 platform_scene = ExtResource("7_d21ai")
-y_min_offset_px = -50.0
-y_max_offset_px = 50.0
+max_num_plat = 5
+y_min_offset_px = -1000.0
+y_max_offset_px = 1000.0
 
 [node name="SpawnArea" type="Area2D" parent="PlatformSpawner"]
 unique_name_in_owner = true
 
 [node name="SpawnArea2D" type="CollisionShape2D" parent="PlatformSpawner/SpawnArea"]
 unique_name_in_owner = true
+position = Vector2(0, 22.5)
 shape = SubResource("RectangleShape2D_d21ai")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(124.84, 382.745)
-scale = Vector2(3.21, 0.37)
+[node name="Player" type="CharacterBody2D" parent="PlatformSpawner" groups=["Player"]]
+z_index = 10
+collision_layer = 2
+collision_mask = 21
+script = SubResource("GDScript_wtcfe")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_rj586")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformSpawner/Player"]
+shape = SubResource("RectangleShape2D_0hol4")
+script = ExtResource("2_epypp")
+metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="PlatformSpawner/Player"]
+z_index = 4
+position = Vector2(-1.90735e-06, 0.500002)
+scale = Vector2(0.171875, 0.164062)
+texture = ExtResource("1_wtcfe")
+metadata/_edit_lock_ = true
+
+[node name="gun" type="Node2D" parent="PlatformSpawner/Player"]
+script = ExtResource("2_0e48y")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlatformSpawner/Player/gun"]
+z_index = 6
+position = Vector2(14.4, 0)
+scale = Vector2(0.2125, 0.082)
 texture = ExtResource("1_wtcfe")
 
-[connection signal="body_entered" from="Area2D" to="Player" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D" to="PlatformSpawner/Player" method="_on_area_2d_body_entered"]
