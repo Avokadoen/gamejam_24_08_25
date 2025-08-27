@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c1polj7ry10r4" path="res://turret.gd" id="1_p1v0k"]
 [ext_resource type="Texture2D" uid="uid://deu3aia44vj3o" path="res://icon.svg" id="2_80vi4"]
-[ext_resource type="Script" uid="uid://degf07mqxgwk5" path="res://collision_player.gd" id="3_mpfow"]
+[ext_resource type="Script" path="res://collision_player.gd" id="3_mpfow"]
 [ext_resource type="Script" uid="uid://cq7yc5xel31o0" path="res://gun.gd" id="4_ipcmd"]
-[ext_resource type="Script" uid="uid://bmkbdfdqytm1y" path="res://area_2d.gd" id="5_a0n47"]
+[ext_resource type="Script" uid="uid://bmkbdfdqytm1y" path="res://scripts/projectile.gd" id="5_a0n47"]
 [ext_resource type="PackedScene" uid="uid://y0ifermp54he" path="res://scenes/hell.tscn" id="6_rcp32"]
 
 [sub_resource type="GDScript" id="GDScript_wtcfe"]

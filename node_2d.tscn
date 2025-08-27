@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://deu3aia44vj3o" path="res://icon.svg" id="1_wtcfe"]
 [ext_resource type="Script" uid="uid://cq7yc5xel31o0" path="res://gun.gd" id="2_0e48y"]
 [ext_resource type="Script" path="res://collision_player.gd" id="2_epypp"]
-[ext_resource type="Script" path="res://area_2d.gd" id="4_0hol4"]
+[ext_resource type="Script" uid="uid://bmkbdfdqytm1y" path="res://scripts/projectile.gd" id="4_0hol4"]
 [ext_resource type="PackedScene" uid="uid://y0ifermp54he" path="res://scenes/hell.tscn" id="5_q6r6c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
