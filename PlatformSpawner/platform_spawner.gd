@@ -3,23 +3,31 @@ extends Node2D
 
 @export var platform_scene: PackedScene
 
-# X spacing controls (Inspector sliders)
+# Spacing controls (Inspector sliders)
+##How large the space between the platforms on the X axis are
 @export_range(16.0, 1024.0, 8.0, "or_greater") var spacing_px: float = 240.0
-@export_range(0.0, 1024.0, 8.0, "or_greater") var first_offset_px: float = 240.0
+##How large the space between the platforms on the Y axis are
 @export_range(0.0, 1024.0, 1.0, "or_greater") var min_vertical_gap_px: float = 48.0
+##How many times should the algorithm try to place platform on the Y axis in a unique spot
 @export var tries_per_slot: int = 64
+##The platform you start on (Optional)
 @export var start_from: NodePath
+##How far the first spawned platform should be from the start platform
+@export_range(0.0, 1024.0, 8.0, "or_greater") var first_offset_px: float = 240.0
 
-#Max number of platforms that can spawn per iteration
+##Max number of platforms that can spawn per iteration
 @export var max_num_plat: int = 3
 
 # --- NEW: random Y band (relative to SpawnArea's vertical center) ---
 # Example: -150..+150 picks a 300px tall band centered in the area.
+##How far up or down can the platforms spawn (Can also be adjusted with the spawn area)
 @export var y_min_offset_px: float = -150.0
+##How far up or down can the platforms spawn (Can also be adjusted with the spawn area)
 @export var y_max_offset_px: float =  150.0
 
 @export var random_seed: int = 12345  # deterministic layout (editor & runtime)
 
+##How far the platforms move (Set to 0 if we want the camera to move)
 @export var scroll_speed_px_sec: float = 60.0  # how fast to drag left
 
 @onready var area: Area2D = %SpawnArea
