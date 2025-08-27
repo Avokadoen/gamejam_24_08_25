@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddyf3oqlkf2wy"]
+
+[ext_resource type="Script" uid="uid://buicc7e5grbj7" path="res://PlatformSpawner/platform_spawner.gd" id="1_x126x"]
+[ext_resource type="PackedScene" uid="uid://b5os2pyj8sem0" path="res://PlatformSpawner/PlatformScene.tscn" id="2_ueync"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d21ai"]
+size = Vector2(2697, 167.5)
+
+[node name="PlatformSpawner" type="Node2D"]
+script = ExtResource("1_x126x")
+platform_scene = ExtResource("2_ueync")
+y_min_offset_px = -50.0
+y_max_offset_px = 50.0
+
+[node name="SpawnArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="SpawnArea2D" type="CollisionShape2D" parent="SpawnArea"]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_d21ai")
