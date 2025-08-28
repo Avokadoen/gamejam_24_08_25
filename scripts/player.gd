@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+class_name Player
 
 const SPEED = 600.0
 const JUMP_VELOCITY = -300.0
@@ -28,14 +29,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
-
-func _on_body_entered(body: Node) -> void:
-	print("Player entered the area!")
-	if body.is_in_group("Player"):
-		print("Player entered the area!")
-
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	print("Player entered the area!")
-	if body.is_in_group("enemyProjectile"):
-		print("Player entered the area!")
+	
+func takeDamage(damage: float) -> void:
+	health -= damage
+	if (health <= 0):
+		print("player is dead, long live the player")

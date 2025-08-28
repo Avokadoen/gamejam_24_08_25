@@ -1,7 +1,10 @@
 extends Area2D
 
 @export var SPEED = 100
+@export var damage = 10
 
+# Projectile only "spawn" from enemies, but may transition into
+# a player projectile if parried
 @export_flags_2d_physics var on_player_parry_layer
 @export_flags_2d_physics var on_player_parry_mask
 
@@ -17,4 +20,9 @@ func _physics_process(delta: float) -> void:
 	position += dir * SPEED * delta;
 
 func _on_body_entered(body: Node2D) -> void:
-	print("test!")
+	# Check if what we hit is player, since we update the collision mask
+	# we can assume collisions are always relevant i.e a player projectile
+	# will never hit the player
+	if body is Player:
+		body.takeDamage(damage)
+	

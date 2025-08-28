@@ -15,6 +15,7 @@ position = Vector2(0, 66)
 zoom = Vector2(0.8, 0.8)
 
 [node name="Player" parent="." instance=ExtResource("1_epypp")]
+position = Vector2(-6, -81)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(459, 280)
@@ -32,4 +33,5 @@ scale = Vector2(0.7, 0.7)
 metadata/_edit_lock_ = true
 
 [node name="Projectile" parent="." instance=ExtResource("4_q6r6c")]
-position = Vector2(216, 314)
+position = Vector2(-8, 59)
+damage = 100
