@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dae06ah2opttl"]
+[gd_scene load_steps=13 format=3 uid="uid://dae06ah2opttl"]
 
 [ext_resource type="Texture2D" uid="uid://deu3aia44vj3o" path="res://icon.svg" id="1_wtcfe"]
 [ext_resource type="Script" uid="uid://cq7yc5xel31o0" path="res://gun.gd" id="2_0e48y"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://y0ifermp54he" path="res://scenes/hell.tscn" id="5_q6r6c"]
 [ext_resource type="Script" uid="uid://buicc7e5grbj7" path="res://PlatformSpawner/platform_spawner.gd" id="6_kdubu"]
 [ext_resource type="PackedScene" uid="uid://b5os2pyj8sem0" path="res://PlatformSpawner/PlatformScene.tscn" id="7_d21ai"]
+[ext_resource type="PackedScene" uid="uid://bnya12dsfyh4b" path="res://projectile.tscn" id="8_rj586"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q6r6c"]
 radius = 8.0
@@ -107,8 +108,12 @@ scale = Vector2(0.171875, 0.164062)
 texture = ExtResource("1_wtcfe")
 metadata/_edit_lock_ = true
 
-[node name="gun" type="Node2D" parent="PlatformSpawner/Player"]
+[node name="gun" type="Node2D" parent="PlatformSpawner/Player" node_paths=PackedStringArray("target")]
 script = ExtResource("2_0e48y")
+bullet_scene = ExtResource("8_rj586")
+enemyGun = true
+target = NodePath("../../../Camera2D")
+bullet_speed = 2000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="PlatformSpawner/Player/gun"]
 z_index = 6
