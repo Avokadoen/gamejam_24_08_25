@@ -391,6 +391,6 @@ script = ExtResource("2_ujl30")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.137611, 0.137611)
 sprite_frames = SubResource("SpriteFrames_2gdjj")
-animation = &"Death"
+animation = &"Run"
 autoplay = "Run"
 metadata/_edit_lock_ = true
