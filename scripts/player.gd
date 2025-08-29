@@ -36,6 +36,12 @@ func _physics_process(delta: float) -> void:
 	
 func takeDamage(damage: float) -> void:
 	health -= damage
+	$AnimatedSprite2D.modulate = Color(1, 0, 0)
+	$Damage_Flash.start(0.2)
 	if (health <= 0):
 		anim_player.play("Death")
 		print("player is dead, long live the player")
+
+
+func _on_damage_flash_timeout() -> void:
+	$AnimatedSprite2D.modulate = Color(1, 1, 1)

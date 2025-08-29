@@ -394,3 +394,7 @@ sprite_frames = SubResource("SpriteFrames_2gdjj")
 animation = &"Run"
 autoplay = "Run"
 metadata/_edit_lock_ = true
+
+[node name="Damage_Flash" type="Timer" parent="."]
+
+[connection signal="timeout" from="Damage_Flash" to="." method="_on_damage_flash_timeout"]
