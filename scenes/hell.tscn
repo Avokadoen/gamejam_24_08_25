@@ -15,14 +15,14 @@ shader_parameter/scroll_rate = 0.3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8ogo1"]
 shader = ExtResource("5_8ogo1")
-shader_parameter/scroll_rate = 3.0
+shader_parameter/scroll_rate = 0.1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_idiul"]
 size = Vector2(7698, 146)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_weiqd"]
 shader = ExtResource("5_8ogo1")
-shader_parameter/scroll_rate = 3.0
+shader_parameter/scroll_rate = 0.05
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q11ot"]
 shader = ExtResource("1_71pqw")

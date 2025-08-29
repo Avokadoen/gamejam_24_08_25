@@ -8,6 +8,13 @@ func _process(_delta) -> void:
 	if Engine.is_editor_hint(): 
 		target_canvas.material.set_shader_parameter("scroll_rate", 0)
 
+	if get_tree().paused:
+		target_canvas.material.set_shader_parameter("scroll_rate", 0)
+	else:
+		target_canvas.material.set_shader_parameter("scroll_rate", scroll_rate)
+
+
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS 
 	target_canvas.material.set_shader_parameter("scroll_rate", scroll_rate)

@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://brrdqih0t5mn2"]
+
+[ext_resource type="Script" uid="uid://bwmxmq30207yj" path="res://pause_menu.gd" id="1_hdmo1"]
+
+[node name="Pause Menu" type="CanvasLayer"]
+follow_viewport_enabled = true
+script = ExtResource("1_hdmo1")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = -1
+offset_left = -3.0
+offset_top = 18.0
+offset_right = -3.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Resume" type="Button" parent="Panel"]
+process_mode = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.498272
+anchor_top = 0.419753
+anchor_right = 0.498272
+anchor_bottom = 0.419753
+offset_left = -155.013
+offset_top = -92.679
+offset_right = 173.987
+offset_bottom = 4.32098
+text = "Resume Game"
+metadata/_edit_use_anchors_ = true
+
+[node name="Quit" type="Button" parent="Panel"]
+process_mode = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.498272
+anchor_top = 0.419753
+anchor_right = 0.498272
+anchor_bottom = 0.419753
+offset_left = -153.013
+offset_top = 52.321
+offset_right = 175.987
+offset_bottom = 149.321
+text = "Quit To Main Menu"
+metadata/_edit_use_anchors_ = true
+
+[node name="Game Paused" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = -53.0
+offset_top = -190.0
+offset_right = 53.0
+offset_bottom = -167.0
+text = "Game Pasued"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Panel/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/Quit" to="." method="_on_quit_pressed"]
