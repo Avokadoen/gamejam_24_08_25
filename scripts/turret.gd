@@ -1,12 +1,13 @@
 extends Node2D
 
 @onready var main = get_tree().get_root().get_node("Node2D");
-@onready var projectile = load("res://projectile.tscn")
+@onready var projectile = load("res://scenes/projectile.tscn")
 
 @export var interval_msec = 1000
 @export var count = 1
 @export var rot_speed = 0
 @export var max_angle = 360
+@export var start_rot_offset = 0
 
 var prev_fire_msec = 0
 
@@ -26,5 +27,5 @@ func shoot(angle):
 	var dir = Vector2(1, 0).rotated(angle)
 	instance.dir = dir
 	instance.startPos = global_position
-	instance.startRot = angle
+	instance.startRot = angle + start_rot_offset
 	main.add_child.call_deferred(instance)
