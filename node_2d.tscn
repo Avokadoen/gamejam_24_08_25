@@ -34,4 +34,5 @@ metadata/_edit_lock_ = true
 
 [node name="Projectile" parent="." instance=ExtResource("4_q6r6c")]
 position = Vector2(-8, 59)
+scale = Vector2(1, 0.98748)
 damage = 100

@@ -1,10 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdmpq4whmfaug"]
+[gd_scene load_steps=14 format=3 uid="uid://bdmpq4whmfaug"]
 
 [ext_resource type="Script" uid="uid://bmkbdfdqytm1y" path="res://scripts/projectile.gd" id="1_q3m7n"]
-[ext_resource type="Texture2D" uid="uid://deu3aia44vj3o" path="res://icon.svg" id="2_softn"]
+[ext_resource type="Shader" uid="uid://ctr7n026fd7x6" path="res://shaders/fire_shader.tres" id="2_byeak"]
+[ext_resource type="Texture2D" uid="uid://boluqx5s3pp3c" path="res://textures/fireball/T_VFX_Noise_465.png" id="3_jxwu6"]
+[ext_resource type="Texture2D" uid="uid://dk3oyrf3dm18j" path="res://textures/fireball/T_Gradient_circle22.jpg" id="4_w7nm8"]
+[ext_resource type="Texture2D" uid="uid://cj5cpdd0338l1" path="res://textures/fireball/T_1_pixel.jpg" id="5_6c2e5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6q2a6"]
 radius = 8.0
+
+[sub_resource type="Gradient" id="Gradient_pl1gp"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ejmht"]
+gradient = SubResource("Gradient_pl1gp")
+fill_to = Vector2(0, 0.84188)
+
+[sub_resource type="Gradient" id="Gradient_031o2"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.351145, 0.544529, 0.78626, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0.9, 0, 1, 1, 0.594, 0.13, 1, 1, 0.21, 0.21, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xo60o"]
+gradient = SubResource("Gradient_031o2")
+
+[sub_resource type="Gradient" id="Gradient_mxgir"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rimnf"]
+gradient = SubResource("Gradient_mxgir")
+fill_from = Vector2(0, 0.850427)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l47rv"]
+shader = ExtResource("2_byeak")
+shader_parameter/Scale = Vector2(1, 1)
+shader_parameter/Speed = Vector2(0, 1)
+shader_parameter/Texture_Main = ExtResource("3_jxwu6")
+shader_parameter/Texture_Add = SubResource("GradientTexture2D_ejmht")
+shader_parameter/Texture_Multiply = ExtResource("4_w7nm8")
+shader_parameter/Texture_Subtract = SubResource("GradientTexture2D_rimnf")
+shader_parameter/Texture_Color_1D = SubResource("GradientTexture1D_xo60o")
 
 [node name="Projectile" type="Area2D"]
 collision_layer = 20
@@ -13,13 +47,13 @@ script = ExtResource("1_q3m7n")
 on_player_parry_layer = 8
 on_player_parry_mask = 36
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 10
-position = Vector2(-1.90735e-06, -1.90735e-06)
-scale = Vector2(0.109375, 0.109375)
-texture = ExtResource("2_softn")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6q2a6")
+
+[node name="Static_Fire" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_l47rv")
+position = Vector2(0, -13.731)
+scale = Vector2(21.3915, 46.538)
+texture = ExtResource("5_6c2e5")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
