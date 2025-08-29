@@ -5,27 +5,27 @@ extends Node2D
 
 @export var interval_msec = 1000
 @export var count = 1
-@export var rot_speed = 0
-@export var max_angle = 360
-@export var start_rot_offset = 0
+@export var rot_degrees_speed = 0
+@export var max_angle_degrees = 360
+@export var start_rot_offset_degrees = 0
 
 var prev_fire_msec = 0
 
 func _process(delta: float) -> void:
 	var elapsed_msec = Time.get_ticks_msec()
 	
-	rotation_degrees += delta * rot_speed
+	rotation_degrees += delta * rot_degrees_speed
 	
 	if elapsed_msec - prev_fire_msec >= interval_msec:
 		prev_fire_msec = elapsed_msec
 		for i in range(count):
-			var angle = max_angle * i / count
-			shoot(angle + global_rotation)
+			var angle_degrees = max_angle_degrees * i / count
+			shoot(angle_degrees + global_rotation_degrees)
 		
-func shoot(angle):
+func shoot(angle_degrees):
 	var instance = projectile.instantiate()
-	var dir = Vector2(1, 0).rotated(angle)
+	var dir = Vector2(1, 0).rotated(angle_degrees * PI / 180)
 	instance.dir = dir
 	instance.startPos = global_position
-	instance.startRot = angle + start_rot_offset
+	instance.startRot = (angle_degrees + start_rot_offset_degrees) * PI / 180
 	main.add_child.call_deferred(instance)
