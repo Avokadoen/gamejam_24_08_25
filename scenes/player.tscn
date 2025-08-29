@@ -399,13 +399,17 @@ animation = &"Run"
 autoplay = "Run"
 metadata/_edit_lock_ = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Parry" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 4
 monitoring = false
 script = ExtResource("88_au8ao")
 duration_msec = 300
 cooldown_msec = 600
+capacity = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parry"]
 shape = SubResource("CircleShape2D_au8ao")
+
+[connection signal="area_entered" from="Parry" to="Parry" method="_on_area_entered"]
+[connection signal="body_entered" from="Parry" to="Parry" method="_on_body_entered"]
