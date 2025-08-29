@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dae06ah2opttl"]
+[gd_scene load_steps=5 format=3 uid="uid://dae06ah2opttl"]
 
 [ext_resource type="PackedScene" uid="uid://dae1fdgnunx0h" path="res://scenes/player.tscn" id="1_epypp"]
-[ext_resource type="Script" uid="uid://bmkbdfdqytm1y" path="res://scripts/projectile.gd" id="4_0hol4"]
-[ext_resource type="PackedScene" uid="uid://bdmpq4whmfaug" path="res://scenes/projectile.tscn" id="4_q6r6c"]
+[ext_resource type="Script" uid="uid://c1polj7ry10r4" path="res://scripts/turret.gd" id="3_0hol4"]
+[ext_resource type="Texture2D" uid="uid://deu3aia44vj3o" path="res://icon.svg" id="4_q6r6c"]
 [ext_resource type="PackedScene" uid="uid://y0ifermp54he" path="res://scenes/hell.tscn" id="5_q6r6c"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_q6r6c"]
-radius = 8.0
 
 [node name="Node2D" type="Node2D"]
 
@@ -15,24 +12,19 @@ position = Vector2(0, 66)
 zoom = Vector2(0.8, 0.8)
 
 [node name="Player" parent="." instance=ExtResource("1_epypp")]
-position = Vector2(-6, -81)
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(459, 280)
-collision_layer = 16
-collision_mask = 255
-script = ExtResource("4_0hol4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-352, 48)
-shape = SubResource("CircleShape2D_q6r6c")
+position = Vector2(0, 250)
 
 [node name="Hell" parent="." instance=ExtResource("5_q6r6c")]
 z_index = -10
 scale = Vector2(0.7, 0.7)
 metadata/_edit_lock_ = true
 
-[node name="Projectile" parent="." instance=ExtResource("4_q6r6c")]
-position = Vector2(-8, 59)
-scale = Vector2(1, 0.98748)
-damage = 100
+[node name="Turret" type="Node2D" parent="."]
+position = Vector2(200, 200)
+script = ExtResource("3_0hol4")
+rot_speed = 15
+start_rot_offset = -90
+
+[node name="Sprite2D" type="Sprite2D" parent="Turret"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_q6r6c")
