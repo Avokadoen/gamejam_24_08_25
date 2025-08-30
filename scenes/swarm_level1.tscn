@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjdt0t3b4x8vn"]
+
+[ext_resource type="Script" uid="uid://bi7eny346lxaj" path="res://scripts/swarm_agent.gd" id="1_k516c"]
+[ext_resource type="PackedScene" uid="uid://ce81m4app2nfs" path="res://scenes/imp_enemy.tscn" id="2_gusuu"]
+
+[sub_resource type="Curve2D" id="Curve2D_k516c"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 68, 308, 0, 0, 0, 0, 262, 212, 0, 0, 0, 0, 209, 12, 0, 0, 0, 0, 43, 101, 0, 0, 0, 0, 67, 306)
+}
+point_count = 5
+
+[node name="SwarmLevel1" type="Node2D"]
+
+[node name="enemy1" type="Node2D" parent="." node_paths=PackedStringArray("loop_path")]
+script = ExtResource("1_k516c")
+spawn_delay = 1.0
+loop_path = NodePath("Path2D")
+enemy = ExtResource("2_gusuu")
+
+[node name="Timer" type="Timer" parent="enemy1"]
+one_shot = true
+
+[node name="Path2D" type="Path2D" parent="enemy1"]
+position = Vector2(-669, -325)
+curve = SubResource("Curve2D_k516c")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="enemy1/Path2D"]
+position = Vector2(91.4606, 75.0181)
+rotation = 2.64945
+progress = 556.724
+
+[connection signal="timeout" from="enemy1/Timer" to="enemy1" method="_on_timer_timeout"]
