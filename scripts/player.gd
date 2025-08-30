@@ -14,9 +14,51 @@ class_name Player
 @export var max_health: float = 100;
 var health: float
 
-var state = State.Run
+# How long time does the player have to parry a projectile
+@export var parry_window: float = 0.2
+var damage_queue: Array
+
 
 enum State {Jump_Start, Jump_Mid, Jump_Land, Run, Death}
+var state = State.Run
+
+func _init() -> void:
+	health = max_health;
+
+func _process(delta: float) -> void:
+	update_state()
+
+	for i in range(damage_queue.size() - 1, -1, -1):
+		var damage = damage_queue[i]
+		damage["parry_window"] -= delta
+		# If we reached zero *last* frame
+		if (damage["parry_window"] <= 0):
+			takeDamage(damage["projectile"])
+			damage_queue.remove_at(i)
+			
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	var direction = Vector2(0,0)
+	if state != State.Death:
+		# Handle jump.
+		if Input.is_action_just_pressed("up") and is_on_floor():
+			velocity.y = jump_velocity
+
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		direction = Input.get_axis("left", "right")
+		if direction:
+			velocity.x = direction * speed
+
+	if !direction:
+		velocity.x = move_toward(velocity.x, 0, drag * delta)
+
+	move_and_slide()
+
 
 func update_state() -> void:
 	match state:
@@ -45,41 +87,19 @@ func update_state() -> void:
 					anim_player.play("Death")
 					audio_player.play()
 
-func _init() -> void:
-	health = max_health;
 
-func _process(delta: float) -> void:
-	update_state()
-
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	var direction = Vector2(0,0)
-	if state != State.Death:
-		# Handle jump.
-		if Input.is_action_just_pressed("up") and is_on_floor():
-			velocity.y = jump_velocity
-
-		# Get the input direction and handle the movement/deceleration.
-		# As good practice, you should replace UI actions with custom gameplay actions.
-		direction = Input.get_axis("left", "right")
-		if direction:
-			velocity.x = direction * speed
-
-	if !direction:
-		velocity.x = move_toward(velocity.x, 0, drag * delta)
-
-	move_and_slide()
-
-func takeDamage(damage: float) -> void:
-	health -= damage
-	$AnimatedSprite2D.modulate = Color(1, 0, 0)
-	$Damage_Flash.start(0.1)
+func takeDamage(projectile: Projectile) -> void:
+	health -= projectile.damage
 	if (health <= 0):
 		state = State.Death
 
+	$AnimatedSprite2D.modulate = Color(1, 0, 0)
+	$Damage_Flash.start(0.1)
+
+	projectile.queue_free()
+
+func registerHit(projectile: Projectile) -> void:
+	damage_queue.append({ "parry_window": parry_window, "projectile": projectile })
 
 func _on_damage_flash_timeout() -> void:
 	$AnimatedSprite2D.modulate = Color(1, 1, 1)
