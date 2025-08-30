@@ -57,10 +57,11 @@ position = Vector2(0, -13.731)
 scale = Vector2(21.3915, 46.538)
 texture = ExtResource("5_6c2e5")
 
+[node name="Timer" type="Timer" parent="."]
+
 [node name="Fireball_Audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_jxwu6")
 pitch_scale = 0.5
 autoplay = true
-[node name="Timer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

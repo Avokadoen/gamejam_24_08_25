@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dae1fdgnunx0h" path="res://scenes/player.tscn" id="1_epypp"]
 [ext_resource type="PackedScene" uid="uid://bdmpq4whmfaug" path="res://scenes/projectile.tscn" id="4_q6r6c"]
-[ext_resource type="PackedScene" path="res://pause_menu.tscn" id="5_kdubu"]
+[ext_resource type="PackedScene" uid="uid://brrdqih0t5mn2" path="res://pause_menu.tscn" id="5_kdubu"]
 [ext_resource type="PackedScene" uid="uid://y0ifermp54he" path="res://scenes/hell.tscn" id="5_q6r6c"]
 
 [node name="Node2D" type="Node2D"]
