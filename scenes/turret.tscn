@@ -7,8 +7,6 @@
 script = ExtResource("1_el7wl")
 timer = NodePath("Timer")
 count = 3
-max_angle_degrees = 90
-start_rot_offset_degrees = -90
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

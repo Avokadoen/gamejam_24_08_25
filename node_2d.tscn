@@ -25,3 +25,5 @@ transform = Transform2D(1, 0, 0, 1, -572.525, -250)
 
 [node name="Turret" parent="." instance=ExtResource("4_0hol4")]
 position = Vector2(-500, 200)
+max_angle_degrees = 90.0
+start_rot_offset_degrees = -90.0
