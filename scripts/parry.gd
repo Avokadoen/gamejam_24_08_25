@@ -5,7 +5,6 @@ extends Area2D
 
 @export var duration_sec: float
 @export var cooldown_sec: float
-@export var timer: Timer
 
 @export_flags_2d_physics var projectile_collision_layer
 @export_flags_2d_physics var projectile_collision_mask
@@ -18,10 +17,15 @@ var active_color: Color = Color.from_rgba8(0, 255, 0, 50)
 var cooldown_color: Color = Color.from_rgba8(255, 0, 0, 50)
 
 var projectiles = []
+var collision_shape: CollisionShape2D
+var timer: Timer
 
 func _ready() -> void:
+	collision_shape = $CollisionShape2D
+	timer = $Timer
+
 	monitoring = false
-	get_child(0).debug_color = ready_color
+	collision_shape.debug_color = ready_color
 	timer.timeout.connect(_on_timer_timeout)
 
 func _process(delta: float) -> void:
@@ -30,7 +34,7 @@ func _process(delta: float) -> void:
 			if Input.is_action_just_pressed("parry"):
 				release_projectiles()
 				monitoring = true
-				get_child(0).debug_color = active_color
+				collision_shape.debug_color = active_color
 				state = State.Active
 				timer.start(duration_sec)
 
@@ -38,11 +42,11 @@ func _on_timer_timeout() -> void:
 	match state:
 		State.Active:
 			monitoring = false
-			get_child(0).debug_color = cooldown_color
+			collision_shape.debug_color = cooldown_color
 			state = State.Cooldown
 			timer.start(cooldown_sec)
 		State.Cooldown:
-			get_child(0).debug_color = ready_color
+			collision_shape.debug_color = ready_color
 			state = State.Ready
 
 func catch_projectile(projectile: Projectile) -> void:

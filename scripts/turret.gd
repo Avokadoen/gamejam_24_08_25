@@ -3,7 +3,6 @@ extends Node2D
 @onready var main = get_tree().get_root().get_node("Node2D");
 @onready var projectile = load("res://scenes/projectile.tscn")
 
-@export var timer: Timer
 @export var count: int = 1
 @export var interval_sec: float = 1
 @export var projectile_speed: float = 100
@@ -11,7 +10,11 @@ extends Node2D
 @export var max_angle_degrees: float = 360
 @export var start_rot_offset_degrees: float = 0
 
+var timer: Timer
+
 func _ready() -> void:
+	timer = $Timer
+	
 	if timer != null:
 		timer.timeout.connect(_on_timer_timeout)
 		timer.start()
