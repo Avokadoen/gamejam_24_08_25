@@ -1,9 +1,11 @@
 extends Area2D
 
-@export var duration_msec: int = 300
-@export var cooldown_msec: int = 600
 @export var capacity: int = 3
 @export var launch_speed: float = 500
+
+@export var duration_sec: float
+@export var cooldown_sec: float
+@export var timer: Timer
 
 @export_flags_2d_physics var projectile_collision_layer
 @export_flags_2d_physics var projectile_collision_mask
@@ -15,32 +17,33 @@ var ready_color: Color = Color.from_rgba8(255, 255, 255, 50)
 var active_color: Color = Color.from_rgba8(0, 255, 0, 50)
 var cooldown_color: Color = Color.from_rgba8(255, 0, 0, 50)
 
-var last_parry_msec = 0
 var projectiles = []
 
 func _ready() -> void:
 	monitoring = false
 	get_child(0).debug_color = ready_color
-	pass
+	timer.timeout.connect(_on_timer_timeout)
 
 func _process(delta: float) -> void:
 	match state:
 		State.Ready:
-			if Input.is_action_just_pressed("catch"):
-				last_parry_msec = Time.get_ticks_msec()
+			if Input.is_action_just_pressed("parry"):
 				release_projectiles()
 				monitoring = true
 				get_child(0).debug_color = active_color
 				state = State.Active
+				timer.start(duration_sec)
+
+func _on_timer_timeout() -> void:
+	match state:
 		State.Active:
-			if Time.get_ticks_msec() - last_parry_msec >= duration_msec:
-				monitoring = false
-				get_child(0).debug_color = cooldown_color
-				state = State.Cooldown
+			monitoring = false
+			get_child(0).debug_color = cooldown_color
+			state = State.Cooldown
+			timer.start(cooldown_sec)
 		State.Cooldown:
-			if Time.get_ticks_msec() - last_parry_msec >= cooldown_msec:
-				get_child(0).debug_color = ready_color
-				state = State.Ready
+			get_child(0).debug_color = ready_color
+			state = State.Ready
 
 func catch_projectile(projectile: Projectile) -> void:
 	if len(projectiles) >= capacity or projectiles.has(projectile):
