@@ -404,9 +404,8 @@ collision_layer = 2
 collision_mask = 4
 monitoring = false
 script = ExtResource("88_au8ao")
-duration_msec = 300
-cooldown_msec = 600
-capacity = 3
+projectile_collision_layer = 8
+projectile_collision_mask = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Parry"]
 shape = SubResource("CircleShape2D_au8ao")
