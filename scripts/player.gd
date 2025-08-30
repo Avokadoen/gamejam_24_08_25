@@ -36,6 +36,7 @@ func _physics_process(delta: float) -> void:
 	
 func takeDamage(damage: float) -> void:
 	health -= damage
+	print("Player took ", damage, " damage")
 	if (health <= 0):
 		anim_player.play("Death")
 		print("player is dead, long live the player")
