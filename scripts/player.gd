@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 class_name Player
 
+@onready var audio_player = $Tumble
+
 @onready var anim_player = $AnimatedSprite2D
 
 @export var speed = 600.0
@@ -38,8 +40,10 @@ func update_state() -> void:
 				anim_player.play("Jump_Mid")
 				state = State.Jump_Mid
 		State.Death:
-			if anim_player.animation != "Death":
-				anim_player.play("Death")
+			if is_on_floor():
+				if anim_player.animation != "Death":
+					anim_player.play("Death")
+					audio_player.play()
 
 func _init() -> void:
 	health = max_health;

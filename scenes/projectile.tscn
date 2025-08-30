@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bdmpq4whmfaug"]
+[gd_scene load_steps=15 format=3 uid="uid://bdmpq4whmfaug"]
 
 [ext_resource type="Script" uid="uid://bmkbdfdqytm1y" path="res://scripts/projectile.gd" id="1_q3m7n"]
 [ext_resource type="Shader" uid="uid://ctr7n026fd7x6" path="res://shaders/fire_shader.tres" id="2_byeak"]
 [ext_resource type="Texture2D" uid="uid://boluqx5s3pp3c" path="res://textures/fireball/T_VFX_Noise_465.png" id="3_jxwu6"]
 [ext_resource type="Texture2D" uid="uid://dk3oyrf3dm18j" path="res://textures/fireball/T_Gradient_circle22.jpg" id="4_w7nm8"]
 [ext_resource type="Texture2D" uid="uid://cj5cpdd0338l1" path="res://textures/fireball/T_1_pixel.jpg" id="5_6c2e5"]
+[ext_resource type="AudioStream" uid="uid://bgvgaoamjre6d" path="res://audio/Fireball.wav" id="6_jxwu6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6q2a6"]
 radius = 8.0
@@ -55,5 +56,10 @@ material = SubResource("ShaderMaterial_l47rv")
 position = Vector2(0, -13.731)
 scale = Vector2(21.3915, 46.538)
 texture = ExtResource("5_6c2e5")
+
+[node name="Fireball_Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_jxwu6")
+pitch_scale = 0.5
+autoplay = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

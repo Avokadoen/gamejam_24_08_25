@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnyvc1xr5iqjp"]
+[gd_scene load_steps=6 format=3 uid="uid://bnyvc1xr5iqjp"]
 
 [ext_resource type="Script" uid="uid://dcadb5n38bhvt" path="res://scripts/menu.gd" id="1_yqeox"]
+[ext_resource type="AudioStream" uid="uid://7m2nobdvbg4m" path="res://audio/Button_Click.ogg" id="2_con2f"]
 [ext_resource type="FontFile" uid="uid://cn3h7t21ovc1g" path="res://fonts/alagard.ttf" id="2_vjb58"]
+[ext_resource type="AudioStream" uid="uid://bosjp1065j8k4" path="res://audio/Button_Hover.ogg" id="4_mhnvy"]
 
 [sub_resource type="Theme" id="Theme_con2f"]
 default_font = ExtResource("2_vjb58")
@@ -35,9 +37,24 @@ alignment = 1
 layout_mode = 2
 text = "Play"
 
+[node name="Play_Click" type="AudioStreamPlayer2D" parent="MarginContainer/VBoxContainer/Play"]
+stream = ExtResource("2_con2f")
+
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
+[node name="Quit_Click" type="AudioStreamPlayer2D" parent="MarginContainer/VBoxContainer/Quit"]
+position = Vector2(0, -27)
+stream = ExtResource("2_con2f")
+
+[node name="Button_Hover" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_mhnvy")
+volume_db = 5.0
+
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="finished" from="MarginContainer/VBoxContainer/Play/Play_Click" to="." method="_on_play_click_finished"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="finished" from="MarginContainer/VBoxContainer/Quit/Quit_Click" to="." method="_on_quit_click_finished"]
