@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnyvc1xr5iqjp"]
+
+[ext_resource type="Script" uid="uid://dcadb5n38bhvt" path="res://scripts/menu.gd" id="1_yqeox"]
+[ext_resource type="FontFile" uid="uid://cn3h7t21ovc1g" path="res://fonts/alagard.ttf" id="2_vjb58"]
+
+[sub_resource type="Theme" id="Theme_con2f"]
+default_font = ExtResource("2_vjb58")
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yqeox")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 37.0
+offset_top = -33.0
+offset_right = 79.0
+offset_bottom = 33.0
+grow_vertical = 2
+theme = SubResource("Theme_con2f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

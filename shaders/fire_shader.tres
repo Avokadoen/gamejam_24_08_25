@@ -32,7 +32,7 @@ color_default = 2
 texture_repeat = 1
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_i3umg"]
-size = Vector2(373, 665)
+size = Vector2(244, 382)
 title = "Texture_3"
 tint_color_enabled = true
 tint_color = Color(0.96875, 0.408691, 0.408691, 0.75)
@@ -62,7 +62,7 @@ source = 5
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_ucuvd"]
-size = Vector2(373, 665)
+size = Vector2(244, 382)
 title = "Texture_4"
 tint_color_enabled = true
 tint_color = Color(0.96875, 0.408691, 0.408691, 0.75)
@@ -88,7 +88,7 @@ color_default = 2
 texture_repeat = 1
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_t022a"]
-size = Vector2(373, 665)
+size = Vector2(244, 382)
 title = "Texture_Color_1D"
 tint_color_enabled = true
 tint_color = Color(0.96875, 0.408691, 0.408691, 0.75)
@@ -101,7 +101,7 @@ source = 5
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_mpj55"]
-size = Vector2(373, 665)
+size = Vector2(244, 382)
 title = "Texture_1"
 tint_color_enabled = true
 tint_color = Color(0.96875, 0.408691, 0.408691, 0.75)
@@ -110,7 +110,7 @@ attached_nodes = PackedInt32Array(2, 3)
 [sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_5fvit"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_lv6lg"]
-size = Vector2(373, 665)
+size = Vector2(244, 382)
 title = "Texture_2"
 tint_color_enabled = true
 tint_color = Color(0.96875, 0.408691, 0.408691, 0.75)
@@ -228,7 +228,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(616.641, -84.3301)
 mode = 1
 flags/unshaded = true
 flags/light_only = false
