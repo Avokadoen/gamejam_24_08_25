@@ -89,12 +89,13 @@ func update_state() -> void:
 
 
 func takeDamage(projectile: Projectile) -> void:
-	health -= projectile.damage
-	if (health <= 0):
-		state = State.Death
+	if state != State.Death:
+		health -= projectile.damage
+		if (health <= 0):
+			state = State.Death
 
-	$AnimatedSprite2D.modulate = Color(1, 0, 0)
-	$Damage_Flash.start(0.1)
+		$AnimatedSprite2D.modulate = Color(1, 0, 0)
+		$Damage_Flash.start(0.1)
 
 	projectile.queue_free()
 
