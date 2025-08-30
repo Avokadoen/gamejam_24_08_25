@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://di5d3huj5w77h"]
+
+[ext_resource type="Script" uid="uid://c1polj7ry10r4" path="res://scripts/turret.gd" id="1_el7wl"]
+[ext_resource type="Texture2D" uid="uid://deu3aia44vj3o" path="res://icon.svg" id="2_485p4"]
+
+[node name="Turret" type="Node2D" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_el7wl")
+timer = NodePath("Timer")
+count = 3
+max_angle_degrees = 90
+start_rot_offset_degrees = -90
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_485p4")
+
+[node name="Timer" type="Timer" parent="."]

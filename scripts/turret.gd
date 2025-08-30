@@ -3,24 +3,25 @@ extends Node2D
 @onready var main = get_tree().get_root().get_node("Node2D");
 @onready var projectile = load("res://scenes/projectile.tscn")
 
-@export var interval_msec = 1000
+@export var timer: Timer
 @export var count = 1
 @export var rot_degrees_speed = 0
 @export var max_angle_degrees = 360
 @export var start_rot_offset_degrees = 0
 
-var prev_fire_msec = 0
+func _ready() -> void:
+	if timer != null:
+		timer.timeout.connect(_on_timer_timeout)
+		timer.start()
 
 func _process(delta: float) -> void:
-	var elapsed_msec = Time.get_ticks_msec()
-	
 	rotation_degrees += delta * rot_degrees_speed
 	
-	if elapsed_msec - prev_fire_msec >= interval_msec:
-		prev_fire_msec = elapsed_msec
-		for i in range(count):
-			var angle_degrees = max_angle_degrees * i / count
-			shoot(angle_degrees + global_rotation_degrees)
+func _on_timer_timeout() -> void:
+	for i in range(count):
+		var angle_degrees = max_angle_degrees * i / count
+		shoot(angle_degrees + global_rotation_degrees)
+	timer.start()
 		
 func shoot(angle_degrees):
 	var instance = projectile.instantiate()
